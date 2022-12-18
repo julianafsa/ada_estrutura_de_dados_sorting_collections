@@ -22,10 +22,35 @@ public class AnalisadorDePrecos {
         return result;
     }
 
+    /**
+     * Analisa se cada produto da lista cabe individualmente no orçamento e retorna uma lista com os produtos
+     * que cabem no orçamento.
+     * @param produtos Lista de produtos.
+     * @param orcamento Orçamento.
+     * @return A lista de produtos que cabem no orçamento.
+     */
     public List<Produto> analisar(List<Produto> produtos, Orcamento orcamento) {
         Collections.sort(produtos);
         final List<Produto> produtosCabemOrcamento = new ArrayList<>();
-        Orcamento novoOrcamento = new Orcamento(orcamento.getMax(), orcamento.getMin());
+        for (Produto produto : produtos) {
+            if (this.cabeNoOrcamento(produto, orcamento)) {
+                produtosCabemOrcamento.add(produto);
+            }
+        }
+        return produtosCabemOrcamento;
+    }
+
+    /**
+     * Analisa se cada produto da lista cabe no orçamento atualizando uma cópia do orçamento a cada
+     * produto adicionado e retorna uma lista com os produtos que cabem no orçamento.
+     * @param produtos Lista de produtos.
+     * @param orcamento Orçamento.
+     * @return A lista de produtos que cabem no orçamento.
+     */
+    public List<Produto> analisarEmConjunto(List<Produto> produtos, Orcamento orcamento) {
+        Collections.sort(produtos);
+        final List<Produto> produtosCabemOrcamento = new ArrayList<>();
+        final Orcamento novoOrcamento = new Orcamento(orcamento.getMax(), orcamento.getMin());
         for (Produto produto : produtos) {
             if (this.cabeNoOrcamento(produto, novoOrcamento)) {
                 produtosCabemOrcamento.add(produto);
@@ -34,4 +59,5 @@ public class AnalisadorDePrecos {
         }
         return produtosCabemOrcamento;
     }
+
 }

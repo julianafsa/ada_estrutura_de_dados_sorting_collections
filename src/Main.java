@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Set<Produto> conjunto = new HashSet<>();
+        //Set<Produto> conjunto = new HashSet<>();
         List<Produto> lista = new ArrayList<>();
 
         Produto produto1 = new Produto("Produto1", "Produto 1", 20D);
@@ -15,11 +15,11 @@ public class Main {
         Produto produto4 = new Produto("Produto4", "Produto 4", 7D);
         Produto produto5 = new Produto("Produto5", "Produto 5", 12D);
 
-        conjunto.add(produto1);
-        conjunto.add(produto2);
-        conjunto.add(produto3);
-        conjunto.add(produto4);
-        conjunto.add(produto5);
+//        conjunto.add(produto1);
+//        conjunto.add(produto2);
+//        conjunto.add(produto3);
+//        conjunto.add(produto4);
+//        conjunto.add(produto5);
 
         lista.add(produto1);
         lista.add(produto2);
@@ -32,7 +32,12 @@ public class Main {
         Orcamento orcamento = new Orcamento(200d, 5d);
         AnalisadorDePrecos analisadorDePrecos = new AnalisadorDePrecos();
         List<Produto> produtos = analisadorDePrecos.analisar(lista, orcamento);
+        System.out.println("Produtos que cabem no orçamento individualmente:");
         produtos.forEach(System.out::println);
+
+        System.out.println("\nProdutos que juntos cabem no orçamento:");
+        List<Produto> produtos2 = analisadorDePrecos.analisarEmConjunto(lista, orcamento);
+        produtos2.forEach(System.out::println);
     }
 
 }
